@@ -15,3 +15,13 @@ test.serial.cb('healthcheck', function (t) {
     t.end()
   })
 })
+
+test.serial.cb('getAllTargets', function (t) {
+  var url = '/api/targets'
+  servertest(server(), url, { encoding: 'json' }, function (err, res) {
+    t.falsy(err, 'no error')
+
+    t.is(res.statusCode, 200, 'correct statusCode')
+    t.end()
+  })
+})
