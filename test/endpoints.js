@@ -20,7 +20,7 @@ test.serial.cb('healthcheck', function (t) {
  * Test for get all targets
  * Expected: { data: [] }
  */
-test.serial.cb('getAllTargets', function (t) {
+test.serial.cb('get all targets 1', function (t) {
   var url = '/api/targets'
   servertest(commonServer, url, { encoding: 'json' }, function (err, res) {
     t.falsy(err, 'no error')
@@ -87,8 +87,24 @@ test.serial.cb('add Target', function (t) {
 })
 
 /***
+ * Test for get all targets
+ * Expected: { data: [<code>targetToAdd</code>] }
+ */
+test.serial.cb('get all targets 2', function (t) {
+  var url = '/api/targets'
+  servertest(commonServer, url, { encoding: 'json' }, function (err, res) {
+    t.falsy(err, 'no error')
+
+    t.is(res.statusCode, 200, 'correct statusCode')
+    console.log('res', res)
+    t.deepEqual(res.body, { data: [targetToAdd] }, 'correct data')
+    t.end()
+  })
+})
+
+/***
  * Test for getting target by id
- * Expected: { data: { ..targetToAdd.. } }
+ * Expected: { data: { <code>targetToAdd</code> } }
  */
 test.serial.cb('get target by id 2', function (t) {
   var url = '/api/target/0'
